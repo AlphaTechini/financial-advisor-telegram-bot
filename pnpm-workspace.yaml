@@ -1,0 +1,5 @@
+minimumReleaseAgeExclude:
+  - grammy@1.45.0
+  - openai@6.48.0
+allowBuilds:
+  esbuild: true
