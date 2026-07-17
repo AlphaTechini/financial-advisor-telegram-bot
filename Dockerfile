@@ -15,6 +15,7 @@ FROM node:24-alpine AS runtime
 
 WORKDIR /app
 ENV NODE_ENV=production
+EXPOSE 8080
 RUN corepack enable
 
 COPY package.json pnpm-lock.yaml ./
