@@ -12,6 +12,7 @@
 - Sessions are in-memory for the first version.
 - Electron Hub is the primary advisor provider and Gemini is the fallback.
 - The bot uses bot-side account binding only. MCP server hardening is documented as a remaining deployment concern.
+- Cloud Run runs the Telegram bot as a regular service with a fixed same-process health listener on `0.0.0.0:8080`.
 
 ## Architectural Decisions
 

@@ -6,12 +6,15 @@ This standalone TypeScript service provides a read-only Telegram financial advis
 
 - Telegram updates and the authentication state machine are implemented in [src/telegram-bot.ts](src/telegram-bot.ts).
 - The Streamable HTTP MCP client and `/mcp` endpoint normalization are implemented in [src/mcp-client.ts](src/mcp-client.ts) and [src/config.ts](src/config.ts).
+- The fixed-port Cloud Run health listener is implemented in [src/health-server.ts](src/health-server.ts).
 - Balance and statement responses are normalized into an advisor snapshot in [src/financial-data.ts](src/financial-data.ts).
 - In-memory verified account sessions are managed in [src/session-store.ts](src/session-store.ts).
 - Electron Hub and Gemini `generateContent` fallback providers are implemented in [src/advisor/providers.ts](src/advisor/providers.ts).
 - The financial advisor instructions can be found in [prompts/financial-advisor.md](prompts/financial-advisor.md).
 
 The bot accepts `MCP_SERVER_URL` as the raw deployed service URL and appends `/mcp` exactly once. The current MCP is stateless, so every tool operation uses a fresh MCP client connection. The bot binds a verified account to the Telegram user session and does not allow the model to choose an account number.
+
+Cloud Run readiness is handled by a minimal health server in the same process on `0.0.0.0:8080`. Telegram updates still use outbound long polling; no second service is required.
 
 ## Authentication Flow
 
